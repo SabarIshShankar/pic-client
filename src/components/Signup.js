@@ -46,5 +46,55 @@ const Signup = ({ login }) => {
     } catch (err) {
       return toast.error(err.message);
     }
+
+    const user = await client("/auth/me");
+    setUser(user.data);
+    localStorage.setItem("user", JSON.stringify(user.data));
+
+    fullname.setValue("");
+    username.setValue("");
+    password.setValue("");
+    email.setValue("");
   };
+
+  return (
+    <FormWrapper>
+      <img src={logo} alt="logo" />
+      <form>
+        <input
+          type="email"
+          placeholder="Email"
+          value={email.value}
+          onChange={email.onChange}
+        />
+        <input
+          type="text"
+          placeholder="full name"
+          value={fullname.value}
+          onChange={fullname.onChange}
+        />
+        <input
+          type="text"
+          placeholder="username"
+          value={username.value}
+          onChange={username.onChange}
+        />
+        <input
+          type="password"
+          placeholder="password"
+          value={password.value}
+          onChange={password.onChange}
+        />
+        <input type="submit" value="Sign up" className="signup-btn" />
+      </form>
+
+      <div>
+        <p>
+          <span onClick={login}>Log in</span>
+        </p>
+      </div>
+    </FormWrapper>
+  );
 };
+
+export default Signup;
