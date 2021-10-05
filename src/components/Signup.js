@@ -58,7 +58,7 @@ const Signup = ({ login }) => {
   };
 
   return (
-    <FormWrapper>
+    <FormWrapper onSubmit={handleLogin}>
       <img src={logo} alt="logo" />
       <form>
         <input
