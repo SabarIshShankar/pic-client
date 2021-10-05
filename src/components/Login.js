@@ -50,4 +50,56 @@ const Login = ({ signup }) => {
   const { setUser } = useContext(UserContext);
   const email = useInput("");
   const password = useInput("");
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    if (!email.value || !password.value) {
+      return toast.error("Please fill in both fields");
+    }
+    const body = { email: email.value, password: password.value };
+
+    try {
+      const { token } = await client("/auth/login", { body });
+      localStorage.setItem("token", token);
+    } catch (err) {
+      return toast.error(err.message);
+    }
+
+    const user = await client("/auth/me");
+    localStorage.setItem("user", JSON.stringify(user.data));
+    setUser(user.data);
+    toast.success("Login successsful");
+
+    email.setValue("");
+    password.setValue("");
+  };
+
+  return (
+    <FormWrapper onSubmit={handleLogin}>
+      <img className="logo" src={logo} alt="logo" />
+      <form>
+        <input
+          type="email"
+          placeholder="email id"
+          value={email.value}
+          onChange={email.onChange}
+        />
+        <input
+          type="password"
+          placeholder="mysuperpassword"
+          value={password.value}
+          onChange={password.onChange}
+        />
+        <ipnut type="submit" value="Log In" className="login" />
+      </form>
+
+      <div>
+        <p>
+          <span onClick={signup}>Sign up</span>
+        </p>
+      </div>
+    </FormWrapper>
+  );
 };
+
+export default Login;
