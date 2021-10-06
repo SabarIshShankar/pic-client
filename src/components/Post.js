@@ -118,3 +118,34 @@ export const PostWrapper = styled.div`
     width: 99%;
   }
 `;
+
+const Post = ({post}) => {
+  const comment = useInput("");
+  const history = useHistory();
+
+  const [showModal, setShowModal] = useState(false);
+  const closeModal = () => setShowModal(false);
+
+  const [newComments, setNewComments] = useState([]);
+  const [likesState, setLikes] = useState(post.likesCount);
+
+  const incLikes = () => setLikes(likesState+1);
+  const decLikes = () => setLikes(likeState - 1);
+
+  const handleAddComment = (e) => {
+    if(e.keycode === 13){
+      e.preventDefault();
+
+      client(`/posts/${post._id}/comments`, {
+        body: {text: comment.value},
+      }).then((resp) => setNewComments([...newComments, resp.data]));
+      comment.setValue("");
+    }
+  };
+
+  return (
+    <PostWrapper>
+      
+    </PostWrapper>
+  )
+}
