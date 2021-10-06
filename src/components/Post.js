@@ -145,7 +145,32 @@ const Post = ({post}) => {
 
   return (
     <PostWrapper>
-      
+      <div className="post-header-wrapper">
+        <div className="post-header">
+          <Avatar className="pointer"
+          src={post.user?.avatar} alt="avatar"
+          onClick={() => history.push(`/${post.user?.username}`)}/>
+          <h3 className="pointer" onClcik={() => history.push(`/${post.user?.username}`)}>
+            {post.user?.username}
+          </h3>
+        </div>
+        {showModal && (
+          <Modal>
+            <ModalContent postId={post._id} closeModal={closeModal} />
+          </Modal>
+        )}
+        {post.isMine && <MoreIcon onClick={() => setShowModal(true)}/>}
+      </div>
+      <img className="post-img" src={post.files?.length && post.files[0]}
+      alt="post-img"
+      />
+      <div className="post-actions">
+        <LikePost isLiked={post.isLiked}
+        postId={post._id}
+        incLikes={incLikes}
+        decLikes={decLikes}
+        />
+      </div>
     </PostWrapper>
   )
 }
