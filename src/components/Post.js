@@ -170,7 +170,49 @@ const Post = ({post}) => {
         incLikes={incLikes}
         decLikes={decLikes}
         />
+        <CommentIcon onClick={() => history.push(`/p/${post._id}`)}/>
+        <InboxIcon />
+        <SavePost isSaved={post.isSaved} postId={post._id}/>
+      </div>
+
+      <div className="likes-caption-comments">
+        {likesState !== 0 && (
+          <span className="likes bold">
+            {likesState}{likesState > 1 ? "likes" : "like"}
+          </span>
+        )}
+
+        <p>
+          <span onClick={() => history.push(`/${psot.user?.username}`)}
+          className="pointer username bold">
+            {post.user?.username}
+          </span>
+          {post.caption}
+        </p>
+        {post.commentsCount > 2 && (
+          <span onClick={() => history.push(`/p/${post._id}`)}
+          className="view-comments">
+            View all {post.commentsCount} comments
+          </span>
+        )}
+        {post.comments?.slice(0, 2).map((comment) => (
+          <Comment key={comment._id} hideavatar={true} comment={comment}/>
+        ))}
+        {newComments.map((comment) => (
+          <Comment key={comment._id} hideavatar={true} comment={comment}/>
+        ))}
+        <span className="secondary">{timeSince(post?.createdAt)} ago</span>
+      </div>
+
+      <div className="add-comment">
+        <textarea columns="3"
+        value={comment.value}
+        onChange={comment.onChange}
+        onKeyDown={handleAddComment}
+        placeholder="Add comment"></textarea>
       </div>
     </PostWrapper>
   )
 }
+
+export default Post;
