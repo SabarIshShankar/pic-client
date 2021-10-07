@@ -103,4 +103,37 @@ const NewPost = () => {
                 toast.success("deleted");
             });
     };
+
+    return(
+        <NewPostWrapper>
+            <label htmlFor="upload-post">
+                <NewPostIcon/>
+            </label>
+            <input id="upload-post" type="file" onChange={handleUploadImage}
+            accept="image/*"
+            style={{display: "none"}}/>
+            {showModal && (
+                <Modal>
+                    <div className="modal-content">
+                        <div className="newpost-header">
+                            <h3 onClick={() => setShowModal(false)}>cancel</h3>
+                            <h3 onClick={handleSubmitPost}>Share</h3>
+                        </div>
+                        {preview && (
+                            <img className="post-preview" src={preview} alt="preview" />
+                        )}
+
+                        <div>
+                            <textarea placeholder="add caption"
+                            value={caption.value}
+                            onChange={caption.onChange}/>
+                        </div>
+                    </div>
+                </Modal>
+
+            )}
+        </NewPostWrapper>
+    )
 }
+
+export default NewPost;
