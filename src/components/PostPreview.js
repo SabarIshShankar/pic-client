@@ -103,4 +103,33 @@ const Wrapper = styled.div`
     
 
     }
-`
+`;
+
+const ProfileView = ({posts}) => {
+    const history = useHistory();
+
+    return(
+        <Wrapper>
+            {posts?.map((posts) => (
+                <div key={posts._id}
+                className="container-overlay"
+                onClick={() => histpry.push(`/p/${post._id}`)}
+                >
+                    <img src={post.files[0]} alt="post"/>
+                    <div className="overlay">
+                        <div className="overlay-content">
+                            <span>
+                                <HeartIcon/>{post.likesCount}
+                            </span>
+                            <span>
+                                <CommentIcon/>{posts.commentsCount}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            ))}
+        </Wrapper>
+    )
+}
+
+export default ProfilePreview;
