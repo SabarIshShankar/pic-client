@@ -51,3 +51,47 @@ const Wrapper = styled.div`
     }
 `;
 
+const NoFeedSuggestions = () => {
+    const [users, setUsers] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const history = useHistory();
+
+    useEffect(() => {
+        client("/users").then((res) => {
+            setUsers(res.data);
+            setLoading(false);
+        });
+    }, []);
+
+    if(loading){
+        return<Loader/>
+    }
+
+    return(
+        <div style={{display: "flex", flexDirection: "column"}}>
+            <h3 style={{marginBottom: "0.7rem"}}> suggestions </h3>
+            <Wrapper>
+                {users.map((user) => (
+                    <div key = {user._id} className="suggestion">
+                        <div className="user-info">
+                            <Avatar className="pointer"
+                            onClick={() => history.push(`/${user.username}`)}
+                            src={user.avatar}
+                            alt="Avatar"/>
+                            <div className="user-meta">
+                                <h4 className="pointer"
+                                onClick={() => history.push(`/${user.username}`)}>
+                                    {user.username}
+                                </h4>
+                                <span className="secondary">{user.fullname}</span>
+                            </div>
+                        </div>
+                        <Follow isFollowing={user.isFollowing} userId={user._id}/>
+                    </div>
+                ))}
+            </Wrapper>
+        </div>
+    )
+}
+
+export default NoFeedSuggestions;
