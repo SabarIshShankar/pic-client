@@ -79,6 +79,54 @@ export const Wrapper = styled.div`
 const ProfileForm = () => {
     const history = useHistory();
     const {user, setUser } = useContext(UserContext);
-    const [newAvatar, setNewAvatar] = useState("") 
+    const [newAvatar, setNewAvatar] = useState(""); 
+
+    const fullname = useInput(user.fullname);
+    const username = useInput(user.username);
+    const bio = useInput(user.bio);
+    const website = useInput(user.website);
+
+    const handleImageUpload = (e) => {
+        if(e.target.files[0]){
+            uploadImage(e.target.files[0]).then((res) => setNewAvatar(res.secure_url));
+        }
+    };
+
+    const handleEditProfile = (e) => {
+        e.preventDefault();
+
+        if(!fullname.value){
+            return toast.error("the name field should not be empty");
+        }
+        if(!username.value){
+            return toast.error("username field shouldnot be empty");
+        }
+
+        const body = {
+            fullname: fullname.value,
+            username: username.value,
+            bio: bio.value,
+            website: website.value,
+            avatar: newAvatar || user.avatar,
+        };
+
+        client("/users", {method: "PUT", body})
+            .then((res) => {
+                setUser(res.data);
+                localStorage.setItem("user", JSON.stringify(res.data));
+                history.push(`/${body.username || user.username}`);
+            })
+            .catch((err) => toast.error(err.message));
+    };
+
+    return(
+        <Wrapper>
+            <form onSubmit={handleEditProfile}>
+                <div className="input-group change-avatar">
+                        
+                </div>    
+            </form>    
+        </Wrapper>
+    )
 } 
 
