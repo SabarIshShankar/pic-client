@@ -63,4 +63,51 @@ const Wrapper = styled.div`
         display: flex;
         margin-bottom: 1rem;
     }
-`
+    .options svg{
+        position: relative;
+        top: 7px;
+        margin-left: 1rem;
+    }
+    span{
+        padding-right: 1rem;
+    }
+    a{
+        color: ${(props) => props.theme.blue};
+    }
+    @media screen and (max-width: 645px){
+        font-size: 1rem;
+
+        .bio, .profile-stats{
+            display: none;
+        }
+        .avatar{
+            width: 140px;
+            height: 140px
+        }
+        .profile-meta{
+            flex-direction: column;
+        }
+        button{
+            margin-left: 0;
+        }
+        .bio-mobile{
+            margin-left: 0;
+        }
+    }
+    @media screen and (max-width: 420px){
+        font-size: 0.9rem;
+
+        avatar{
+            width: 100px;
+            height: 100px
+        }
+    }
+`;
+
+const modalHeaderStyled = {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    borderBotton: "1px solid #DBDBDB",
+    padding: "1rem",
+};
