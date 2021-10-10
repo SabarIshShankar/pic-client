@@ -123,10 +123,46 @@ const ProfileForm = () => {
         <Wrapper>
             <form onSubmit={handleEditProfile}>
                 <div className="input-group change-avatar">
-                        
+                    <div>
+                     <label htmlFor="change-avatar">
+                     <Avatar lg src={newAvatar ? newAvatar : user.avatar} 
+                     alt="avatar"/>     
+                    </label>    
+                    <input id="change-avatar" accept = "image/*" 
+                    type="file" onChange={handleImageUpload}/>
+                    </div>    
+                    <div className="change-avatar-meta">
+                        <h2>{user.username}</h2>
+                        <label htmlFor="change-avatar-link">
+                            <span>Chnage profile pic</span>
+                        </label>
+                        <input id="change-avatar-link"
+                        accept="image/*" type="file" onChange={handleImageUpload}/>
+                    </div>
                 </div>    
+                <div className="input-group">
+                    <label className="bold">Name</label>
+                    <input type="text" value={fullname.value} onChange={fullname.onChange} />
+                </div>
+
+                <div className="input-group">
+                    <label className="bold">Username</label>
+                    <input type="text" value={username.value} onChange={username.onChange}/>
+                </div>
+                <div className="input-group">
+                    <label className="bold">Website</label>
+                    <input type="text" value={website.value} onChange={website.onChange}/>
+                </div>
+                <div className="input-group textarea-group">
+                    <label className="bold">Bio</label>
+                    <textarea cols="10" value={bio.value} onChange={bio.onChange}></textarea>
+                </div>
+
+                <Button>Submit</Button>
             </form>    
         </Wrapper>
-    )
-} 
+    );
+}; 
+
+export default ProfileForm;
 
