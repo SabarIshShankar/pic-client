@@ -147,4 +147,12 @@ const ModalContextWrapper = sytled.div`
 
 const ModalContent = ({loggedInUser, users, closeModal, title}) => {
     const history = useHistory();
+    return(
+        <div style={{maxHeight: "400px", overflowY: "auto"}}>
+            <div stylele={modalHeaderStyle}>
+                <h3>{title}</h3>
+                <CloseIcon onClick={closeModal}/>
+            </div>
+        </div>
+    )
 }
