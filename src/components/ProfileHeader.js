@@ -112,7 +112,7 @@ const modalHeaderStyle = {
     padding: "1rem",
 };
 
-const ModalContextWrapper = sytled.div`
+const ModalContentWrapper = sytled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -153,6 +153,35 @@ const ModalContent = ({loggedInUser, users, closeModal, title}) => {
                 <h3>{title}</h3>
                 <CloseIcon onClick={closeModal}/>
             </div>
+            {users.map((user) => (
+                <ModalContentWrapper key={user._id}>
+                    <div className="profile-info">
+                        <img className="pointer" onClick={() => {
+                            closeModal();
+                            history.push(`/${user.username}`);
+                        }}
+                        src={user.avatar} alt="avatar"/>
+
+                        <div className="user-info">
+                            <h3 className="pointer" onClick={() => {
+                                history.push(`/${user.username}`);
+                            }}>
+                                {user.username}
+                            </h3>
+                            <span>{user.fullname}</span>
+                        </div>
+                    </div>
+                    <Follow isFollowing={user.isFollowing} userId={user._id} />
+                </ModalContentWrapper>
+            ))}
         </div>
-    )
+    );
+};
+
+const ProfileHeader = ({profile}) => {
+    const history = useHistory();
+    const {user, setUser}= useContext(UserContext);
+
+    const [showFollowersModal, setFollowersModal] = useState(false);
+    const [showFollowingModal, setFollowingModal] = useState(false);
 }
