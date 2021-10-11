@@ -203,6 +203,7 @@ const ProfileHeader = ({profile}) => {
     useEffect(() => setFollowers(profile?.followersCount), [profile]);
 
     return(
+        <>
         <Wrapper>
             <img className="avatar" src={profile?.avatar} alt="avatar"/>
             <div className="profile-info">
@@ -239,11 +240,63 @@ const ProfileHeader = ({profile}) => {
                     )}
                     {showFollowingModal && profile?.following.length > 0 && (
                         <Modal>
-                            
+                            <ModalContent
+                            loggedInUser={user}
+                            users={profile?.following}
+                            title="Following"
+                            closeModal={closeModal}
+                            />
                         </Modal>
                     )}
                 </div>
+                <div className="bio">
+                    <span className="bold">{profile?.username}</span>
+                    <p>{profile?.bio}</p>
+                    <a href={profile?.website}
+                    target="_blank"
+                    rel="noopener noreferrer">
+                        {profile?.website}
+                    </a>
+                </div>
             </div>
         </Wrapper>
+        <MobileWrapper>
+        <div className="mobile-profile-stats">
+            <span>{profile?.postCount}</span>
+            <span className="pointer" onClick={() => setFollowersModal(true)}>
+                {followersState} followers
+            </span>
+            <span className="pointer" onClick={() => setFollowingModal(true)}>
+                {profile?.followingCount} following
+            </span>
+
+            {showFollowersModal && profile?.followers.length > 0 && (
+                <Modal>
+                    <ModalContent loggedInUser={user}
+                    users={profile?.followers}
+                    title="Followers" closeModal={closeModal}
+                    />
+                </Modal>
+            )}
+            {showFollowingModal && profile?.following.length > 0 && (
+                <Modal>
+                    <ModalContent loggedInUser={user}
+                    users={profile?.following}
+                    title="Following" closeModal={closeModal}
+                    />
+                </Modal>
+            )}
+        </div>
+        <div className="mobile-bio">
+            <span className="bold">{profile?.fullname}</span>
+            <p>{profile?.bio}</p>
+            <a href={profile?.website} target="_blank" rel="noopener noreferrer">
+                {profile?.website}
+            </a>
+        </div>
+    </MobileWrapper>
+    </>   
     )
 } 
+
+export default ProfileHeader;
