@@ -206,7 +206,43 @@ const ProfileHeader = ({profile}) => {
         <Wrapper>
             <img className="avatar" src={profile?.avatar} alt="avatar"/>
             <div className="profile-info">
-                
+                <div className="profile-meta">
+                    <h2>{profile?.username}</h2>
+                    {profile?.isMe ? (
+                            <div className="options">
+                            <Button secondary onClick={() => history.push("/accounts/edit")}>edit profile</Button>
+                            <OptionsIcon onClick={handleLogout}/>
+                            </div>
+                    ):(
+                        <Follow isFollowing={profile?.isFollowing}
+                        incFollowers={incFollowers}
+                        decFollowers={decFollowers}
+                        userId={profile?.id}
+                        />
+                    )}
+                </div>
+                <div className="profile-stats">
+                    <span className="pointer" onClick={() => setFollowersModal}>
+                        {followersState} followers
+                    </span>
+                    <span className="pointer" onClick={() => setFollowingModal(true)}>
+                        {profile?.followingCount} following
+                    </span>
+                    {showFollowersModal && profile?.followers.length > 0 && (
+                        <Modal>
+                            <ModalContent loggedInUser={user}
+                            users={profile?.followers}
+                            title="Followers"
+                            closeModal={closeModal}
+                            />
+                        </Modal>
+                    )}
+                    {showFollowingModal && profile?.following.length > 0 && (
+                        <Modal>
+                            
+                        </Modal>
+                    )}
+                </div>
             </div>
         </Wrapper>
     )
