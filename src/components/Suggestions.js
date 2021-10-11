@@ -92,7 +92,19 @@ const Suggestions = () => {
 
     return(
         <Wrapper>
-            
+            <UserCard user={user}/>
+            <div className="suggestions">
+                <h3>Suggestions</h3>
+                {users.slice(0, 4).map((user) => (
+                    <div key={user.username} className="suggestions-usercard">
+                        <UserCard user={user} />
+                        <Follow nobtn isFollowing={user.isFollowing} userId={user._id}/>
+                    </div>
+                ))}
+                {users.length === 0 && <p>no suggestions as of now</p>}
+            </div>
         </Wrapper>
-    )
-}
+    );
+};
+
+export default Suggestions;
