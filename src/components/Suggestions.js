@@ -47,4 +47,52 @@ const Wrapper = styled.div`
     @media screen and (max-width:1040px){
         display: none;
     }
-`
+`;
+
+const StyledUserCard = styled.div`
+    disaply: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+
+    span{
+        color: ${(props) => props.theme.secondaryColor};
+    }
+`;
+
+export const UserCard = ({user}) => {
+    const history = useHistory();
+
+    return(
+        <StyledUserCard>
+            <Avatar
+            className="pointer"
+            onClick={() => history.push(`/${user.username}`)}
+            lg src={user.avatar}
+            alt="avatar"
+            />
+            <div className="user-info">
+                <h3 className="pointer" onClick={() => history.push(`/${user.username}`)}>
+                    {user.username}
+                </h3>
+                <span>{user.fullname}</span>
+            </div>
+        </StyledUserCard>
+    );
+};
+
+const Suggestions = () => {
+    const {user} = useContext(UserContext);
+    const [users, setUsers] = useState([]);
+
+    useEffect(() => {
+        client("/users").then((response) => {
+            setUsers(response.data.filter((user) => !user.isFollowing));
+        });
+    }, []);
+
+    return(
+        <Wrapper>
+            
+        </Wrapper>
+    )
+}
