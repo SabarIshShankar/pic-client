@@ -184,4 +184,30 @@ const ProfileHeader = ({profile}) => {
 
     const [showFollowersModal, setFollowersModal] = useState(false);
     const [showFollowingModal, setFollowingModal] = useState(false);
-}
+
+    const closeModal = () => {
+        setFollowersModal(false);
+        setFollowingModal(false);
+    };
+
+    const [followersState, setFollowers]= useState(0);
+    const incFollowers = () => setFollowers(followersState + 1);
+    const decFollowers = () => setFollowers(followersState - 1);
+
+    const handleLogout = () => {
+        setUser(null);
+        localStorage.removeItem("user");
+        localStorage.removeItem("token");
+        toast.success("you are logged out");
+    }
+    useEffect(() => setFollowers(profile?.followersCount), [profile]);
+
+    return(
+        <Wrapper>
+            <img className="avatar" src={profile?.avatar} alt="avatar"/>
+            <div className="profile-info">
+                
+            </div>
+        </Wrapper>
+    )
+} 
