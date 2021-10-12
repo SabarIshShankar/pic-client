@@ -83,9 +83,35 @@ const Profile = () => {
                     <span>Saved</span>
                 </div>
             </div>
+
+            {tab === "POSTS" && (
+                <>
+                {profile?.posts?.length === 0 ? (
+                    <Placeholder title="Posts"
+                    text="After you post theyll appear here"
+                    icon="post"
+                    />
+                ):(
+                    <PostPreview posts={profile?.posts}/>
+                )}
+                </>
+            )}
+            {tab === "SAVED" && (
+                <>
+                {profile?.savedPosts?.length === 0 ? (
+                    <Plcaeholder titkle = "Saved"
+                    text="Save photos and videos that you want to see again"
+                    icon="bookmark"/>
+                ):(
+                    <PostPreview posts={profile?.savedPosts}/>
+                )}
+                </>
+            )}
         </Wrapper>
-    )
-}
+    );
+};
+
+export default Profile;
  
 
 
