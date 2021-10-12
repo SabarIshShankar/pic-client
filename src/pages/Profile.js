@@ -43,9 +43,30 @@ const Profile = () => {
         window.scrollTo(0, 0);
         client(`/users/${username}`)
             .then((res) => {
-                
+                setLoading(false);
+                setDeadEnd(false);
+                setProfile(res.data);
             })
-    }, [])
+            .catch((err) => setDeadEnd(true));
+    }, [username]);
+
+    if(!deadend && loading){
+        return <Loader/>;
+    }
+
+    if(deadend){
+        return(
+            <Placeholder title="Sorry, this page is not available"
+            text="the link followed is broken, or removed"/>
+        );
+    }
+
+    return(
+        <Wrapper>
+            
+        </Wrapper>
+    )
 }
  
+
 
