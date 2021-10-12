@@ -32,4 +32,20 @@ const Wrapper = styled.div`
     }
 `;
 
+const Profile = () => {
+    const [tab, seTab] = useState("POSTS");
+    const {username} = useParams();
+    const [profile, setProfile] = useState({});
+    const [loading, setLoading] = useState(true);
+    const [deadend, setDeadEnd] = useState(false);
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+        client(`/users/${username}`)
+            .then((res) => {
+                
+            })
+    }, [])
+}
+ 
 
