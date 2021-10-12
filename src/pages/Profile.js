@@ -6,6 +6,7 @@ import ProfileHeader from '../components/ProfileHeader';
 import Loader from '../components/Placeholder'
 import Loader from "../components/Loader";
 import {client} from '../utils';
+import { PostIcon } from "../components/Icons";
 
 const Wrapper = styled.div`
     :profile-tab{
@@ -63,7 +64,25 @@ const Profile = () => {
 
     return(
         <Wrapper>
-            
+            <ProfileHeader
+            profile={profile}
+            />
+            <hr/>
+
+            <div className="profile-tab">
+                <div style={{fontWeight: tab === "POSTS"?"500":""}}
+                onClick={() => setTab("POSTS")}>
+                    <PostIcon/>
+                    <span>Posts</span>
+                </div>
+                <div style={{
+                    fontWeight: tab === "SAVED" ? "500":""
+                }}
+                onClick={() => setTab("SAVED")}>
+                    <SavedIcon/>
+                    <span>Saved</span>
+                </div>
+            </div>
         </Wrapper>
     )
 }
