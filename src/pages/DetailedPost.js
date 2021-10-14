@@ -35,4 +35,44 @@ const Wrapper = styled.div`
         display: flex;
         align-items: center;
     }
+    .post-img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    .post-actions-stats{
+        padding: 1rem;
+        padding-bottom: 0.1rem;
+    }
+
+    .post-actions{
+        display: flex;
+        align-items: center;
+        padding-bottom: 0.5rem;
+    }
+
+    .post-actions svg:last-child{
+        margin-left: auto;
+    }
+
+    .comments{
+        border-bottom: 1px solid ${(props) => props.theme.borderColor};
+        padding: 1rem;
+        height: 300px;
+        overflow-y: scroll;
+        scrollbar=width: none;
+    }
+    .comments::-webkit-scrollbar{
+        width: 0;
+        height: 0;
+    }
+    svg{
+        margin-right: 1rem;
+    }
+
+    textarea{
+        height: 100%;
+        width: 100%;
+    }
+
 `
