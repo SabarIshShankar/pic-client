@@ -128,4 +128,61 @@ const DetailedPost = () => {
             comment.setValue("");
         }
     };
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+        client(`/posts/${postId}`)
+            .then((res) => {
+                setPost(res.data);
+                setComments(res.data.comments);
+                setLikes(res.data.likesCount);
+                setLoading(false);
+            })
+            .catch((err) => setDeadend(true));
+    }, [postId]);
+
+    if(!deadend && loading){
+        return <Loader/>;
+    }
+
+    if(deadend){
+        return(
+            <Placeholder title="Sorry, this page isnt available"
+            text="The link is broken"
+            />
+        );
+    }
+
+    return(
+        <Wrapper>
+            <img className="post-img"
+            src={post.files?.length && post.files[0]}
+            alit="post"
+            />
+            <div className="post-info">
+                <div className="post-header-wrapper">
+                    <div className="post-header">
+                        <Avatar onClick={() => history.push(`/${post.user?.username}`)}
+                        className="pointer avatar" src={post.user?.avatar}
+                        alt="avatar"
+                        />
+                        <h3 className="pointer"
+                        onClick={() => history.push(`/${post.user?.username}`)}
+                        >
+                            {post.user?.username}
+                        </h3>
+                    </div>
+                    {post.isMine && <MoreIcon onClick={() => setShowModal(true)}/>}
+                    {showModal && (
+                        <Modal>
+                            <ModalContent
+                            postId={post._id}
+                            hideGoToPost={true}
+                            closeModal={closeModal}/>
+                        </Modal>
+                    )}
+                </div>
+            </div>
+        </Wrapper>
+    )
 }
