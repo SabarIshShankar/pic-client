@@ -182,7 +182,45 @@ const DetailedPost = () => {
                         </Modal>
                     )}
                 </div>
+
+                <div className="comments">
+                    {commentsState.map((comment) => (
+                        <Comment key={comment._id} comment={comment}/>
+                    ))}
+                    <div ref={commentsEndRef}/>
+                </div>
+                <div className="pointer-actions-stats">
+                    <div className="post-actions">
+                        <LikePost
+                        isLiked={post?.isLiked}
+                        postId={post?._id}
+                        incLikes={incLikes}
+                        decLikes={decLikes}
+                        />
+                        <CommentIcon/>
+                        <InboxIcon/>
+                        <SavePost isSaved={post?.isSaved} postId={post?._id}/>
+                    </div>
+                    {likesState !== 0 && (
+                        <span className="likes bold">
+                            {likesState} {likesState > 1 ? "likes" : "like"}
+                        </span>
+                    )}
+                </div>
+                <span style={{
+                    display: "block", padding: "0 1rem", paddingBottom: "1rem"
+                }}
+                className="secondary">
+                    {timeSince(post.createdAt)} ago
+                </span>
+
+                <div className="add-comment">
+                    <textarea columns="2" placeholder="add a comment" value={comment.value} onChange={comment.onChange} onKeyDown={handleAddComment}>
+                    </textarea>
+                </div>
             </div>
         </Wrapper>
-    )
-}
+    );
+};
+
+export default DetailedPost;
