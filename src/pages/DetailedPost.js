@@ -91,3 +91,41 @@ const Wrapper = styled.div`
         }
     }
 `;
+
+const DetailedPost = () => {
+    const history = useHistory();
+    const {postId} = useParams();
+
+    const comments = useInput("");
+    const commentsEndRef = useRef(null);
+
+    const [showModal, setShowModal] = useState(false)
+    const closeModal = () => setShowModal(false);
+
+    const [loading, setLoading] = useState(true);
+    const [deadend, setDeadend] = useState(false);
+    const [post, setPost] = useState({});
+
+    const [likesState, setLikes] = useState(0);
+    const [commentsState, setComments] = useState([]);
+
+    const incLikes = () => setLikes(likesState + 1);
+    const decLikes = () => setLikes(likesState - 1);
+
+    const scrollToBottom = () => commentsEndRef.current.scrollIntoView({behavior: "smooth"});
+
+    const handleAddComment = (e) => {
+        if(e.keyCode === 13){
+            e.preventDefault();
+
+            client(`/posts/${post._id}/comments`, {
+                body: {text: comment.value},
+            }).then((resp) => {
+                setComments([...commentsState, resp.data]);
+                scrollToBottom();
+            });
+
+            comment.setValue("");
+        }
+    };
+}
