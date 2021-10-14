@@ -30,5 +30,13 @@ const Wrapper = styled.div`
 `;
 
 const EditProfile = () => {
-    
-}
+    return(
+        <Wrapper>
+            <div className="profile-form-container">
+                <ProfileForm/>
+            </div>
+        </Wrapper>
+    );
+};
+
+export default EditProfile;
