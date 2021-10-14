@@ -73,6 +73,21 @@ const Wrapper = styled.div`
     textarea{
         height: 100%;
         width: 100%;
+        background: ${(props) => props.theme.bg};
+        border: none;
+        border-top: 1p solid ${(props) => props.theme.borderColor};
+        resize: none;
+        padding: 1rem 0 0 1rem;
+        font-size: 1rem;
+        font-family: "Fira Sans", sans-serif;
     }
 
-`
+    @media screen and (max-width: 840px){
+        display: flex;
+        flex-direction: column;
+
+        .comments{
+            height: 100%;
+        }
+    }
+`;
