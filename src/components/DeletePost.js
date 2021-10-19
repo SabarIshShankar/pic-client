@@ -4,7 +4,7 @@ import {useHistory} from 'react-router-dom';
 import {FeedContext} from '../context/FeedContext';
 import {client} from '../utils';
 
-const DeletPost = ({postId, closeModal, goToHome}) => {
+const DeletePost = ({postId, closeModal, goToHome}) => {
     const {feed, setFeed} = useContext(FeedContext);
     const history = useHistory();
 
@@ -16,7 +16,7 @@ const DeletPost = ({postId, closeModal, goToHome}) => {
 
         setFeed(feed.filter((post) => post._id !== postId));
         toast.success("post has been deleted");
-        client(`/posts/${postId}`, {methods: "DELETE"});
+        client(`/posts/${postId}`, {method: "DELETE"});
     };
 
     return(

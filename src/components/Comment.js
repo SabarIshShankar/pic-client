@@ -11,7 +11,7 @@ const CommentWrapper = styled.div`
     }
 `;
 
-const Comment = ({comment, hideAvatar}) => {
+const Comment = ({comment, hideavatar}) => {
     const history = useHistory();
 
     return(

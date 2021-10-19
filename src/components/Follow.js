@@ -29,7 +29,7 @@ const Follow = ({nobtn, isFollowing, incFollowers, decFollowers, userId}) => {
             {nobtn ? (
                 <span style={{color: "#262626"}} className="pointer" onClick={() => handleFollow()}>
                     Following</span>
-            ): (
+            ) : (
                 <Button onClick={() => handleFollow()}>Following</Button>
             )}
             </>
@@ -40,7 +40,7 @@ const Follow = ({nobtn, isFollowing, incFollowers, decFollowers, userId}) => {
             {nobtn ? (
                 <span className="pointer" onClick={() => handleFollow()}>Follow</span>
 
-            ): (
+            ) : (
                 <Button onClick={() => handleFollow()}>
                     Follow
                 </Button>

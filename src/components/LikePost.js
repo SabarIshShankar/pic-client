@@ -20,7 +20,7 @@ const LikePost = ({isLiked, postId, incLikes, decLikes}) => {
             client(`/posts/${postId}/toggleLike`);
         }
     };
-    if(liekdState){
+    if(likedState){
         return <FilledHeartIcon onClick={handleToggleLike}/>;
     }
     if(!likedState){
