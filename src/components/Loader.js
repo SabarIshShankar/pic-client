@@ -21,7 +21,7 @@ const Wrapper =  styled.div`
     svg{
         height: 50px;
         width: 50px;
-        fill: ${(props) => props.theme.secondayColor};
+        fill: ${(props) => props.theme.secondaryColor};
     }
 
     @media screen and (max-width: 500px){

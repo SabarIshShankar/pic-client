@@ -64,7 +64,7 @@ const NewPost = () => {
             reader.readAsDataUrl(e.target.files[0]);
 
             uploadImage(e.target.files[0]).then((res) => {
-                setPostImage(res.source_url);
+                setPostImage(res.secure_url);
             });
         }
     };
@@ -88,7 +88,7 @@ const NewPost = () => {
             caption.setValue("");
 
             const newPost = {
-                caption: cleanedCaptaion,
+                caption: cleanedCaption,
                 files: [postImage],
                 tags,
             };

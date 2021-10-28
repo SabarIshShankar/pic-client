@@ -88,7 +88,7 @@ const Nav = () => {
                   borderRadius: "12px"
                 }}
                 src={user.avatar}
-                alt="avater"
+                alt="avatar"
               />
             </Link>
           </li>

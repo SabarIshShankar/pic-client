@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { toast } from "react-toastify";
 import styled from "styled-components";
-import { client } from "./utils";
+import { client } from "../utils";
 import useInput from "../hooks/useInput";
 import { UserContext } from "../context/UserContext";
 import logo from "../assets/logo.png";
@@ -90,7 +90,7 @@ const Login = ({ signup }) => {
           value={password.value}
           onChange={password.onChange}
         />
-        <ipnut type="submit" value="Log In" className="login" />
+        <ipnut type="submit" value="Log In" className="login-btn" />
       </form>
 
       <div>

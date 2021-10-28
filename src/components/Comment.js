@@ -21,7 +21,7 @@ const Comment = ({comment, hideavatar}) => {
             {hideavatar && (
                 <Avatar className="pointer"
                 onClick={() => history.push(`/${comment.user.username}`)}
-                src={comment.user.avatar} lat="Avatar"
+                src={comment.user.avatar} alt="Avatar"
                 />
             )}
 

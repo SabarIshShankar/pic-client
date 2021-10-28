@@ -6,7 +6,7 @@ const LikePost = ({isLiked, postId, incLikes, decLikes}) => {
     const [likedState, setLikes] = useState(isLiked);
 
     useEffect(() => {
-        setLikes(isLiked);
+        setLiked(isLiked);
     }, [isLiked]);
 
     const handleToggleLike = () => {
